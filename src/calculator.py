@@ -29,6 +29,8 @@ def interactive():
             continue
 
         print("Result:", result)
-        again = input("Another calculation? (y/n): ").strip().lower()
+        # Print the prompt explicitly so tests can see it even with monkeypatch
+        print("Another calculation?")
+        again = input().strip().lower()
         if again not in ("y", "yes"):
             break
