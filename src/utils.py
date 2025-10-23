@@ -1,4 +1,5 @@
 def add(*args):
+    print("LOG: addition started")
     """
     Return the sum of all numeric arguments.
     If no arguments are provided, return 0.
