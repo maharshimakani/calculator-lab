@@ -67,3 +67,25 @@ def test_interactive_zero_division_then_success(monkeypatch, capsys):
 
     assert "Error: division by zero" in out
     assert "Result: 3.0" in out
+
+
+def test_perform_operation_subtract():
+    assert calculator.perform_operation("2", 5, 3) == 2
+
+
+def test_perform_operation_multiply_stub(monkeypatch):
+    # stub multiply so branch "3" executes even if utils.multiply doesn't exist yet
+    monkeypatch.setattr(calculator.utils, "multiply", lambda a, b: a * b, raising=False)
+    assert calculator.perform_operation("3", 2, 4) == 8
+
+
+def test_perform_operation_divide_stub(monkeypatch):
+    # stub divide so branch "4" executes even if utils.divide doesn't exist yet
+    monkeypatch.setattr(calculator.utils, "divide", lambda a, b: a / b, raising=False)
+    assert calculator.perform_operation("4", 9, 3) == 3
+
+
+def test_perform_operation_invalid_choice_unit():
+    import pytest
+    with pytest.raises(ValueError):
+        calculator.perform_operation("9", 1, 1)
